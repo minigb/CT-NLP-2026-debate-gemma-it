@@ -1,3 +1,7 @@
 accelerate
+bitsandbytes
+pandas
+pyarrow
 torch
+tqdm
 transformers>=5.5.0

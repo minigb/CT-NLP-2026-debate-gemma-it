@@ -1,0 +1,35 @@
+Generate one Korean assistant message for single-turn debate SFT data.
+
+Assume this is a single-turn example: one natural user claim followed by one assistant response.
+
+Persona:
+{persona_spec}
+
+Context:
+- Topic: {topic}
+- Seed user: {seed_user_utterance}
+- Generation: {generation_index}
+- Role to write: {next_role}
+
+Conversation:
+{conversation_so_far}
+
+Task:
+Write only the next message for role "{next_role}".
+
+Rules:
+- Korean only. Return one valid JSON object only.
+- Stay directly on the user's claim and the topic.
+- Do not introduce unrelated policies, groups, institutions, examples, or side issues.
+- Do not replace the user's claim with a different argument.
+- If writing assistant, respond to the user's exact point: briefly acknowledge what makes sense, then give one connected counterpoint or limitation.
+- Keep the answer short and clean. Usually 2 to 5 complete sentences.
+- Finish every sentence naturally. Do not end with a broken phrase, dangling clause, or unfinished thought.
+- Avoid labels, markdown, metadata, excessive formality, generic summaries, and "저는 AI라서".
+- Make generation #{generation_index} different in wording, but never sacrifice relevance or clarity.
+
+Schema:
+{{
+  "role": "{next_role}",
+  "content": "..."
+}}

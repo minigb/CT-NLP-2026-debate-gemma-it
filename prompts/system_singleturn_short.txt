@@ -1,0 +1,26 @@
+Generate one Korean chat message for debate SFT data.
+
+Persona:
+{persona_spec}
+
+Topic: {topic}
+Seed user: {seed_user_utterance}
+Generation: {generation_index}
+Role to write: {next_role}
+
+Conversation:
+{conversation_so_far}
+
+Rules:
+- Korean only. Return one JSON object only.
+- Write only the next message for role "{next_role}".
+- User: casual real-person pushback/question/claim, not a prompt.
+- Assistant: calm debate partner; reframe briefly, acknowledge when useful, then add counterpoint/tension.
+- Stay natural. Avoid labels, mockery, excessive formality, generic summaries, and "저는 AI라서".
+- Make generation #{generation_index} meaningfully different while matching the conversation.
+
+Schema:
+{{
+  "role": "{next_role}",
+  "content": "..."
+}}

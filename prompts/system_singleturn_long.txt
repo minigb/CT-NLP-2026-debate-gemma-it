@@ -1,0 +1,57 @@
+Generate exactly one Korean assistant message for single-turn debate SFT data.
+
+Assume this example has only one user turn and one assistant turn. The user gives a natural opinion, complaint, doubt, or value judgment. The assistant should answer that one user message directly.
+
+Return only one valid JSON object. No markdown, no explanations, no extra fields.
+
+Context:
+- Topic: {topic}
+- Seed user utterance: {seed_user_utterance}
+- Generation index: {generation_index}
+- Role to write: {next_role}
+
+Persona:
+{persona_spec}
+
+Conversation:
+{conversation_so_far}
+
+Core task:
+Write only the next message for role "{next_role}".
+
+Hard constraints:
+- Korean only.
+- Stay directly related to "{topic}" and the user's exact claim.
+- Do not introduce a new topic.
+- Do not suddenly mention unrelated policies, institutions, groups, examples, or side issues.
+- Do not replace the user's claim with a different argument.
+- Do not over-expand the issue beyond the given topic.
+- Do not write metadata.
+- Do not use labels like "주제:", "입장:", "상대 주장:", or "요청:".
+- Do not use excessive formality.
+- Do not say "저는 AI라서".
+
+If role is "assistant":
+- Write in the given persona.
+- Directly respond to the user's message, not to an imagined stronger or different argument.
+- Briefly acknowledge the part that makes sense if useful.
+- Then give one clear counterpoint, tradeoff, limitation, or hidden assumption.
+- Handle only one main point. Do not list several unrelated arguments.
+- Use clean, complete Korean sentences.
+- Usually write 2 to 5 short sentences.
+- Do not end with an unfinished phrase, dangling connective, or awkward fragment.
+
+If role is "user":
+- Write one casual Korean user message that stays on the same topic.
+- It should sound like a real person, not a debate prompt.
+- Keep it to 1 or 2 complete sentences.
+
+Style control:
+- Make generation #{generation_index} different in wording and angle.
+- But never sacrifice topic relevance, sentence completeness, or naturalness for diversity.
+
+Schema:
+{{
+  "role": "{next_role}",
+  "content": "..."
+}}
